@@ -1,0 +1,8 @@
+services:
+  app:
+    build: .
+    volumes:
+      - .dockerenv:/app/.venv
+      - .:/app
+    tty: true
+    stdin_open: true
