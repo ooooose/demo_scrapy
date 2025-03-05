@@ -1,0 +1,51 @@
+# Python関連
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.swp
+.env
+.venv/
+venv/
+pip-log.txt
+pip-delete-this-directory.txt
+Pipfile
+Pipfile.lock
+poetry.lock
+
+# IDE / エディタ関連
+.vscode/
+.idea/
+*.iml
+*.sublime-project
+*.sublime-workspace
+
+# OS関連
+.DS_Store
+Thumbs.db
+
+# Logs & DB
+logs/
+*.log
+*.sqlite3
+instance/
+debug.log
+
+# FastAPI関連
+.env
+.env.local
+.env.production
+.env.development
+.env.test
+/secrets/
+
+# Docker関連
+docker-compose.override.yml
+.dockerignore
+
+# pytest, coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.cache/
+
