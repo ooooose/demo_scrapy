@@ -10,4 +10,7 @@ from itemadapter import ItemAdapter
 
 class BleaguePipeline:
     def process_item(self, item, spider):
+        title = item["title"]
+        with open("/tmp/title.txt", "a") as f:
+            f.write(title + "\n")
         return item
