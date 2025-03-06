@@ -1,24 +1,22 @@
 import scrapy
-
+from scrapy_playwright.page import PageMethod
 
 class LoginSpider(scrapy.Spider):
-  name = 'login_spider'
-  start_urls = [""]
+    name = "login_spider"
+    start_urls = ["xxx"]
 
-  def parse(self, response):
-    return scrapy.FormRequest.from_response(
-      response,
-      formdata={'email': '', 'password': ''},
-      callback=self.after_login
-    )
-  
-  def after_login(self, response):
-    if "ログインに失敗しました。" in response.text:
-      self.logger.error("Login failed")
-      return
+    def start_requests(self):
+        yield scrapy.Request(
+            url=self.start_urls[0],
+            meta={"playwright": True, "playwright_page_methods": [
+                PageMethod("wait_for_selector", "input[type=email]"),
+                PageMethod("fill", "input[type=email]", "xxx"),
+                PageMethod("fill", "input[type=password]", "xxx"),
+                PageMethod("click", "button[type=submit]"),
+                PageMethod("wait_for_navigation")
+            ]},
+            callback=self.after_login
+        )
 
-    return response.follow("/dashboard")
-
-  def parse_dashboard(self, response):
-    title = response.xpath("//title/text()").get()
-    yield {"title": title}
+    def after_login(self, response):
+        yield {"title": response.xpath("//title/text()").get()}
